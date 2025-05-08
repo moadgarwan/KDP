@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon KDP Income Splitter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2e4c6d;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2e4c6d;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        .account-section {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #fafafa;
+        }
+        
+        .input-section, .result-section {
+            margin-bottom: 30px;
+        }
+        
+        .summary-section {
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2e4c6d;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #396eb0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2e4c6d;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+            font-size: 14px;
+        }
+        
+        .result-section {
+            display: none;
+            background-color: #f0f5ff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .result-section.active {
+            display: block;
+        }
+        
+        .result-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .person-share {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .person-share span:first-child {
+            font-weight: 600;
+        }
+        
+        .reset-btn {
+            background-color: #6c757d;
+            margin-top: 15px;
+        }
+        
+        .reset-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        .total-section {
+            background-color: #e0f7fa;
+            border: 2px solid #2e4c6d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .total-section h3 {
+            color: #2e4c6d;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .total-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .total-item:last-child {
+            border-bottom: none;
+        }
+        
+        .total-item span:first-child {
+            font-weight: 600;
+        }
+        
+        .total-amount {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e4c6d;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amazon KDP Income Splitter</h1>
+        
+        <div class="note">
+            <strong>Note:</strong> This calculator rounds cents in favor of Ezzohra, Abdellatif and other partners at every step. Their amounts are always rounded up to the nearest dollar, while your amounts are rounded down. This applies to all calculations including the initial splits and any further sub-splits.
+        </div>
+        
+        <div class="account-section">
+            <h2>Amazon KDP Account 1 (Meriem)</h2>
+            <div class="input-section">
+                <label for="total-income-1">Total Income ($):</label>
+                <input type="number" id="total-income-1" placeholder="Enter total income">
+                
+                <label for="ad-cost-1">Amount Paid on Ads ($):</label>
+                <input type="number" id="ad-cost-1" placeholder="Enter amount paid on ads">
+            </div>
+            
+            <div class="result-section" id="result-section-1">
+                <div class="result-item">
+                    <h3>Initial Calculation</h3>
+                    <div class="person-share">
+                        <span>Total Income:</span>
+                        <span id="total-income-result-1">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ad Costs:</span>
+                        <span id="ad-cost-result-1">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Remaining Amount:</span>
+                        <span id="remaining-amount-1">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Main Split (60% / 40%)</h3>
+                    <div class="person-share">
+                        <span>Your Share (60%):</span>
+                        <span id="your-main-share-1">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ezzohra's Initial Share (40%):</span>
+                        <span id="ezzohra-initial-share-1">$0.00 → $0</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Your Share Distribution</h3>
+                    <div class="person-share">
+                        <span>To Abdellatif (15% of your 60%):</span>
+                        <span id="abdellatif-share-1">$0.00 → $0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>To Ezzohra (12% of your 60%):</span>
+                        <span id="ezzohra-secondary-share-1">$0.00 → $0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Remaining for You:</span>
+                        <span id="your-final-share-1">$0.00 → $0</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Final Distribution (Account 1)</h3>
+                    <div class="person-share">
+                        <span>Your Final Amount:</span>
+                        <span id="your-total-1">$0.00 → $0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Abdellatif's Final Amount:</span>
+                        <span id="abdellatif-total-1">$0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ezzohra's Final Amount:</span>
+                        <span id="ezzohra-total-1">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="account-section">
+            <h2>Amazon KDP Account 2 (Soukaina)</h2>
+            <div class="input-section">
+                <label for="total-income-2">Total Income ($):</label>
+                <input type="number" id="total-income-2" placeholder="Enter total income">
+                
+                <label for="ad-cost-2">Amount Paid on Ads ($):</label>
+                <input type="number" id="ad-cost-2" placeholder="Enter amount paid on ads">
+            </div>
+            
+            <div class="result-section" id="result-section-2">
+                <div class="result-item">
+                    <h3>Initial Calculation</h3>
+                    <div class="person-share">
+                        <span>Total Income:</span>
+                        <span id="total-income-result-2">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ad Costs:</span>
+                        <span id="ad-cost-result-2">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Remaining Amount:</span>
+                        <span id="remaining-amount-2">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Main Split (55% / 45%)</h3>
+                    <div class="person-share">
+                        <span>Your Share (55%):</span>
+                        <span id="your-main-share-2">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ezzohra's Share (45%):</span>
+                        <span id="ezzohra-share-2">$0.00 → $0</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Final Distribution (Account 2)</h3>
+                    <div class="person-share">
+                        <span>Your Final Amount:</span>
+                        <span id="your-total-2">$0.00 → $0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ezzohra's Final Amount:</span>
+                        <span id="ezzohra-total-2">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="account-section">
+            <h2>Amazon KDP Account 3 (Company)</h2>
+            <div class="input-section">
+                <label for="german-income-3">Income from Germany ($):</label>
+                <input type="number" id="german-income-3" placeholder="Enter income from Germany">
+                
+                <label for="french-income-3">Income from France ($):</label>
+                <input type="number" id="french-income-3" placeholder="Enter income from France">
+                
+                <label for="ad-cost-3">Amount Paid on Ads ($):</label>
+                <input type="number" id="ad-cost-3" placeholder="Enter amount paid on ads">
+            </div>
+            
+            <div class="result-section" id="result-section-3">
+                <div class="result-item">
+                    <h3>Income Breakdown</h3>
+                    <div class="person-share">
+                        <span>Income from Germany:</span>
+                        <span id="german-income-result-3">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Income from France:</span>
+                        <span id="french-income-result-3">$0.00</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Ad Costs (deducted from Germany income):</span>
+                        <span id="ad-cost-result-3">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <h3>Final Distribution (Account 3)</h3>
+                    <div class="person-share">
+                        <span>Your Amount (Germany income minus ad costs):</span>
+                        <span id="your-total-3">$0.00 → $0</span>
+                    </div>
+                    <div class="person-share">
+                        <span>Abdellatif's Amount (France income):</span>
+                        <span id="abdellatif-total-3">$0.00 → $0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="calculateAll()">Calculate All Shares</button>
+        
+        <div class="total-section" id="total-section">
+            <h3>Combined Totals From All Accounts</h3>
+            <div class="total-item">
+                <span>Your Total:</span>
+                <span id="your-grand-total" class="total-amount">$0</span>
+            </div>
+            <div class="total-item">
+                <span>Abdellatif's Total:</span>
+                <span id="abdellatif-grand-total" class="total-amount">$0</span>
+            </div>
+            <div class="total-item">
+                <span>Ezzohra's Total:</span>
+                <span id="ezzohra-grand-total" class="total-amount">$0</span>
+            </div>
+        </div>
+        
+        <button class="reset-btn" onclick="resetCalculator()">Reset Calculator</button>
+    </div>
+    
+    <script>
+        // Initialize as hidden
+        document.getElementById('total-section').style.display = 'none';
+        document.getElementById('result-section-1').style.display = 'none';
+        document.getElementById('result-section-2').style.display = 'none';
+        document.getElementById('result-section-3').style.display = 'none';
+        
+        function calculateAccount1() {
+            // Get input values
+            const totalIncome = parseFloat(document.getElementById('total-income-1').value) || 0;
+            const adCost = parseFloat(document.getElementById('ad-cost-1').value) || 0;
+            
+            // Calculate remaining amount after ad costs
+            const remainingAmount = totalIncome - adCost;
+            
+            // Calculate main shares
+            const yourMainShare = remainingAmount * 0.6; // 60% for you
+            const ezzohraInitialShare = remainingAmount * 0.4; // 40% for Ezzohra
+            
+            // Round up Ezzohra's initial share
+            const ezzohraInitialRounded = Math.ceil(ezzohraInitialShare);
+            
+            // Calculate distributions from your share (rounding up for partners)
+            const abdellatifExact = yourMainShare * 0.15; // 15% of your 60% to Abdellatif (exact)
+            const abdellatifShare = Math.ceil(abdellatifExact); // Round up for Abdellatif
+            
+            const ezzohraSecondaryExact = yourMainShare * 0.12; // 12% of your 60% to Ezzohra (exact)
+            const ezzohraSecondaryShare = Math.ceil(ezzohraSecondaryExact); // Round up for Ezzohra
+            
+            // What remains for you after rounding up for partners
+            const yourFinalShare = yourMainShare - abdellatifShare - ezzohraSecondaryShare;
+            
+            // Calculate final distributions with all rounding in favor of partners
+            const ezzohraTotal = ezzohraInitialRounded + ezzohraSecondaryShare;
+            const abdellatifTotal = abdellatifShare;
+            const yourTotal = remainingAmount - ezzohraTotal - abdellatifTotal;
+            
+            // Update result fields
+            document.getElementById('total-income-result-1').textContent = '$' + totalIncome.toFixed(2);
+            document.getElementById('ad-cost-result-1').textContent = '$' + adCost.toFixed(2);
+            document.getElementById('remaining-amount-1').textContent = '$' + remainingAmount.toFixed(2);
+            
+            document.getElementById('your-main-share-1').textContent = '$' + yourMainShare.toFixed(2);
+            document.getElementById('ezzohra-initial-share-1').textContent = '$' + ezzohraInitialShare.toFixed(2) + ' → $' + ezzohraInitialRounded;
+            
+            document.getElementById('abdellatif-share-1').textContent = '$' + abdellatifExact.toFixed(2) + ' → $' + abdellatifShare;
+            document.getElementById('ezzohra-secondary-share-1').textContent = '$' + ezzohraSecondaryExact.toFixed(2) + ' → $' + ezzohraSecondaryShare;
+            document.getElementById('your-final-share-1').textContent = '$' + yourFinalShare.toFixed(2) + ' → $' + Math.floor(yourFinalShare);
+            
+            document.getElementById('your-total-1').textContent = '$' + yourTotal.toFixed(2) + ' → $' + Math.floor(yourTotal);
+            document.getElementById('abdellatif-total-1').textContent = '$' + abdellatifTotal;
+            document.getElementById('ezzohra-total-1').textContent = '$' + ezzohraTotal;
+            
+            // Show results
+            document.getElementById('result-section-1').style.display = 'block';
+            
+            // Return the calculated values for the grand total
+            return {
+                yourTotal: Math.floor(yourTotal),
+                abdellatifTotal: abdellatifTotal,
+                ezzohraTotal: ezzohraTotal
+            };
+        }
+        
+        function calculateAccount2() {
+            // Get input values
+            const totalIncome = parseFloat(document.getElementById('total-income-2').value) || 0;
+            const adCost = parseFloat(document.getElementById('ad-cost-2').value) || 0;
+            
+            // Calculate remaining amount after ad costs
+            const remainingAmount = totalIncome - adCost;
+            
+            // Calculate shares with 55/45 split
+            const yourShareExact = remainingAmount * 0.55; // 55% for you
+            const ezzohraShareExact = remainingAmount * 0.45; // 45% for Ezzohra
+            
+            // Round up Ezzohra's share
+            const ezzohraShare = Math.ceil(ezzohraShareExact);
+            
+            // Your total is whatever remains after rounding up Ezzohra's share
+            const yourTotal = remainingAmount - ezzohraShare;
+            
+            // Update result fields
+            document.getElementById('total-income-result-2').textContent = '$' + totalIncome.toFixed(2);
+            document.getElementById('ad-cost-result-2').textContent = '$' + adCost.toFixed(2);
+            document.getElementById('remaining-amount-2').textContent = '$' + remainingAmount.toFixed(2);
+            
+            document.getElementById('your-main-share-2').textContent = '$' + yourShareExact.toFixed(2);
+            document.getElementById('ezzohra-share-2').textContent = '$' + ezzohraShareExact.toFixed(2) + ' → $' + ezzohraShare;
+            
+            document.getElementById('your-total-2').textContent = '$' + yourShareExact.toFixed(2) + ' → $' + Math.floor(yourTotal);
+            document.getElementById('ezzohra-total-2').textContent = '$' + ezzohraShare;
+            
+            // Show results
+            document.getElementById('result-section-2').style.display = 'block';
+            
+            // Return the calculated values for the grand total
+            return {
+                yourTotal: Math.floor(yourTotal),
+                ezzohraTotal: ezzohraShare
+            };
+        }
+        
+        function calculateAccount3() {
+            // Get input values
+            const germanIncome = parseFloat(document.getElementById('german-income-3').value) || 0;
+            const frenchIncome = parseFloat(document.getElementById('french-income-3').value) || 0;
+            const adCost = parseFloat(document.getElementById('ad-cost-3').value) || 0;
+            
+            // Calculate your share (Germany income minus ads)
+            const yourShareExact = germanIncome - adCost;
+            
+            // Abdellatif gets all French income
+            const abdellatifShareExact = frenchIncome;
+            
+            // Round up Abdellatif's share
+            const abdellatifShare = Math.ceil(abdellatifShareExact);
+            
+            // Your share is rounded down
+            const yourShare = Math.floor(yourShareExact);
+            
+            // Update result fields
+            document.getElementById('german-income-result-3').textContent = '$' + germanIncome.toFixed(2);
+            document.getElementById('french-income-result-3').textContent = '$' + frenchIncome.toFixed(2);
+            document.getElementById('ad-cost-result-3').textContent = '$' + adCost.toFixed(2);
+            
+            document.getElementById('your-total-3').textContent = '$' + yourShareExact.toFixed(2) + ' → $' + yourShare;
+            document.getElementById('abdellatif-total-3').textContent = '$' + abdellatifShareExact.toFixed(2) + ' → $' + abdellatifShare;
+            
+            // Show results
+            document.getElementById('result-section-3').style.display = 'block';
+            
+            // Return the calculated values for the grand total
+            return {
+                yourTotal: yourShare,
+                abdellatifTotal: abdellatifShare,
+                ezzohraTotal: 0 // No Ezzohra share in Account 3
+            };
+        }
+        
+        function calculateAll() {
+            // Calculate all accounts
+            const account1 = calculateAccount1();
+            const account2 = calculateAccount2();
+            const account3 = calculateAccount3();
+            
+            // Calculate grand totals
+            const yourGrandTotal = account1.yourTotal + account2.yourTotal + account3.yourTotal;
+            const abdellatifGrandTotal = account1.abdellatifTotal + account3.abdellatifTotal;
+            const ezzohraGrandTotal = account1.ezzohraTotal + account2.ezzohraTotal;
+            
+            // Update the grand total display
+            document.getElementById('your-grand-total').textContent = '$' + yourGrandTotal;
+            document.getElementById('abdellatif-grand-total').textContent = '$' + abdellatifGrandTotal;
+            document.getElementById('ezzohra-grand-total').textContent = '$' + ezzohraGrandTotal;
+            
+            // Show the grand total section
+            document.getElementById('total-section').style.display = 'block';
+        }
+        
+        function resetCalculator() {
+            // Clear input fields for Account 1
+            document.getElementById('total-income-1').value = '';
+            document.getElementById('ad-cost-1').value = '';
+            
+            // Clear input fields for Account 2
+            document.getElementById('total-income-2').value = '';
+            document.getElementById('ad-cost-2').value = '';
+            
+            // Clear input fields for Account 3
+            document.getElementById('german-income-3').value = '';
+            document.getElementById('french-income-3').value = '';
+            document.getElementById('ad-cost-3').value = '';
+            
+            // Hide results
+            document.getElementById('result-section-1').style.display = 'none';
+            document.getElementById('result-section-2').style.display = 'none';
+            document.getElementById('result-section-3').style.display = 'none';
+            document.getElementById('total-section').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
