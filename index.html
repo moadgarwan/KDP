@@ -185,7 +185,7 @@
         <h1>Amazon KDP Income Splitter</h1>
         
         <div class="note">
-            <strong>Note:</strong> This calculator rounds cents in favor of essaid, Abdellatif and other partners at every step. Their amounts are always rounded up to the nearest dollar, while your amounts are rounded down. This applies to all calculations including the initial splits and any further sub-splits.
+            <strong>Note:</strong> This calculator rounds cents in favor of Ezzohra, Abdellatif and other partners at every step. Their amounts are always rounded up to the nearest dollar, while your amounts are rounded down. This applies to all calculations including the initial splits and any further sub-splits.
         </div>
         
         <div class="account-section">
@@ -222,8 +222,8 @@
                         <span id="your-main-share-1">$0.00</span>
                     </div>
                     <div class="person-share">
-                        <span>essaid's Initial Share (40%):</span>
-                        <span id="essaid-initial-share-1">$0.00 → $0</span>
+                        <span>Ezzohra's Initial Share (40%):</span>
+                        <span id="Ezzohra-initial-share-1">$0.00 → $0</span>
                     </div>
                 </div>
                 
@@ -234,8 +234,8 @@
                         <span id="abdellatif-share-1">$0.00 → $0</span>
                     </div>
                     <div class="person-share">
-                        <span>To essaid (12% of your 60%):</span>
-                        <span id="essaid-secondary-share-1">$0.00 → $0</span>
+                        <span>To Ezzohra (12% of your 60%):</span>
+                        <span id="Ezzohra-secondary-share-1">$0.00 → $0</span>
                     </div>
                     <div class="person-share">
                         <span>Remaining for You:</span>
@@ -254,8 +254,8 @@
                         <span id="abdellatif-total-1">$0</span>
                     </div>
                     <div class="person-share">
-                        <span>essaid's Final Amount:</span>
-                        <span id="essaid-total-1">$0</span>
+                        <span>Ezzohra's Final Amount:</span>
+                        <span id="Ezzohra-total-1">$0</span>
                     </div>
                 </div>
             </div>
@@ -295,8 +295,8 @@
                         <span id="your-main-share-2">$0.00</span>
                     </div>
                     <div class="person-share">
-                        <span>essaid's Share (45%):</span>
-                        <span id="essaid-share-2">$0.00 → $0</span>
+                        <span>Ezzohra's Share (45%):</span>
+                        <span id="Ezzohra-share-2">$0.00 → $0</span>
                     </div>
                 </div>
                 
@@ -307,8 +307,8 @@
                         <span id="your-total-2">$0.00 → $0</span>
                     </div>
                     <div class="person-share">
-                        <span>essaid's Final Amount:</span>
-                        <span id="essaid-total-2">$0</span>
+                        <span>Ezzohra's Final Amount:</span>
+                        <span id="Ezzohra-total-2">$0</span>
                     </div>
                 </div>
             </div>
@@ -371,8 +371,8 @@
                 <span id="abdellatif-grand-total" class="total-amount">$0</span>
             </div>
             <div class="total-item">
-                <span>essaid's Total:</span>
-                <span id="essaid-grand-total" class="total-amount">$0</span>
+                <span>Ezzohra's Total:</span>
+                <span id="Ezzohra-grand-total" class="total-amount">$0</span>
             </div>
         </div>
         
@@ -396,25 +396,25 @@
             
             // Calculate main shares
             const yourMainShare = remainingAmount * 0.6; // 60% for you
-            const essaidInitialShare = remainingAmount * 0.4; // 40% for essaid
+            const EzzohraInitialShare = remainingAmount * 0.4; // 40% for Ezzohra
             
-            // Round up essaid's initial share
-            const essaidInitialRounded = Math.ceil(essaidInitialShare);
+            // Round up Ezzohra's initial share
+            const EzzohraInitialRounded = Math.ceil(EzzohraInitialShare);
             
             // Calculate distributions from your share (rounding up for partners)
             const abdellatifExact = yourMainShare * 0.15; // 15% of your 60% to Abdellatif (exact)
             const abdellatifShare = Math.ceil(abdellatifExact); // Round up for Abdellatif
             
-            const essaidSecondaryExact = yourMainShare * 0.12; // 12% of your 60% to essaid (exact)
-            const essaidSecondaryShare = Math.ceil(essaidSecondaryExact); // Round up for essaid
+            const EzzohraSecondaryExact = yourMainShare * 0.12; // 12% of your 60% to Ezzohra (exact)
+            const EzzohraSecondaryShare = Math.ceil(EzzohraSecondaryExact); // Round up for Ezzohra
             
             // What remains for you after rounding up for partners
-            const yourFinalShare = yourMainShare - abdellatifShare - essaidSecondaryShare;
+            const yourFinalShare = yourMainShare - abdellatifShare - EzzohraSecondaryShare;
             
             // Calculate final distributions with all rounding in favor of partners
-            const essaidTotal = essaidInitialRounded + essaidSecondaryShare;
+            const EzzohraTotal = EzzohraInitialRounded + EzzohraSecondaryShare;
             const abdellatifTotal = abdellatifShare;
-            const yourTotal = remainingAmount - essaidTotal - abdellatifTotal;
+            const yourTotal = remainingAmount - EzzohraTotal - abdellatifTotal;
             
             // Update result fields
             document.getElementById('total-income-result-1').textContent = '$' + totalIncome.toFixed(2);
@@ -422,15 +422,15 @@
             document.getElementById('remaining-amount-1').textContent = '$' + remainingAmount.toFixed(2);
             
             document.getElementById('your-main-share-1').textContent = '$' + yourMainShare.toFixed(2);
-            document.getElementById('essaid-initial-share-1').textContent = '$' + essaidInitialShare.toFixed(2) + ' → $' + essaidInitialRounded;
+            document.getElementById('Ezzohra-initial-share-1').textContent = '$' + EzzohraInitialShare.toFixed(2) + ' → $' + EzzohraInitialRounded;
             
             document.getElementById('abdellatif-share-1').textContent = '$' + abdellatifExact.toFixed(2) + ' → $' + abdellatifShare;
-            document.getElementById('essaid-secondary-share-1').textContent = '$' + essaidSecondaryExact.toFixed(2) + ' → $' + essaidSecondaryShare;
+            document.getElementById('Ezzohra-secondary-share-1').textContent = '$' + EzzohraSecondaryExact.toFixed(2) + ' → $' + EzzohraSecondaryShare;
             document.getElementById('your-final-share-1').textContent = '$' + yourFinalShare.toFixed(2) + ' → $' + Math.floor(yourFinalShare);
             
             document.getElementById('your-total-1').textContent = '$' + yourTotal.toFixed(2) + ' → $' + Math.floor(yourTotal);
             document.getElementById('abdellatif-total-1').textContent = '$' + abdellatifTotal;
-            document.getElementById('essaid-total-1').textContent = '$' + essaidTotal;
+            document.getElementById('Ezzohra-total-1').textContent = '$' + EzzohraTotal;
             
             // Show results
             document.getElementById('result-section-1').style.display = 'block';
@@ -439,7 +439,7 @@
             return {
                 yourTotal: Math.floor(yourTotal),
                 abdellatifTotal: abdellatifTotal,
-                essaidTotal: essaidTotal
+                EzzohraTotal: EzzohraTotal
             };
         }
         
@@ -453,13 +453,13 @@
             
             // Calculate shares with 55/45 split
             const yourShareExact = remainingAmount * 0.55; // 55% for you
-            const essaidShareExact = remainingAmount * 0.45; // 45% for essaid
+            const EzzohraShareExact = remainingAmount * 0.45; // 45% for Ezzohra
             
-            // Round up essaid's share
-            const essaidShare = Math.ceil(essaidShareExact);
+            // Round up Ezzohra's share
+            const EzzohraShare = Math.ceil(EzzohraShareExact);
             
-            // Your total is whatever remains after rounding up essaid's share
-            const yourTotal = remainingAmount - essaidShare;
+            // Your total is whatever remains after rounding up Ezzohra's share
+            const yourTotal = remainingAmount - EzzohraShare;
             
             // Update result fields
             document.getElementById('total-income-result-2').textContent = '$' + totalIncome.toFixed(2);
@@ -467,10 +467,10 @@
             document.getElementById('remaining-amount-2').textContent = '$' + remainingAmount.toFixed(2);
             
             document.getElementById('your-main-share-2').textContent = '$' + yourShareExact.toFixed(2);
-            document.getElementById('essaid-share-2').textContent = '$' + essaidShareExact.toFixed(2) + ' → $' + essaidShare;
+            document.getElementById('Ezzohra-share-2').textContent = '$' + EzzohraShareExact.toFixed(2) + ' → $' + EzzohraShare;
             
             document.getElementById('your-total-2').textContent = '$' + yourShareExact.toFixed(2) + ' → $' + Math.floor(yourTotal);
-            document.getElementById('essaid-total-2').textContent = '$' + essaidShare;
+            document.getElementById('Ezzohra-total-2').textContent = '$' + EzzohraShare;
             
             // Show results
             document.getElementById('result-section-2').style.display = 'block';
@@ -478,7 +478,7 @@
             // Return the calculated values for the grand total
             return {
                 yourTotal: Math.floor(yourTotal),
-                essaidTotal: essaidShare
+                EzzohraTotal: EzzohraShare
             };
         }
         
@@ -515,7 +515,7 @@
             return {
                 yourTotal: yourShare,
                 abdellatifTotal: abdellatifShare,
-                essaidTotal: 0 // No essaid share in Account 3
+                EzzohraTotal: 0 // No Ezzohra share in Account 3
             };
         }
         
@@ -528,12 +528,12 @@
             // Calculate grand totals
             const yourGrandTotal = account1.yourTotal + account2.yourTotal + account3.yourTotal;
             const abdellatifGrandTotal = account1.abdellatifTotal + account3.abdellatifTotal;
-            const essaidGrandTotal = account1.essaidTotal + account2.essaidTotal;
+            const EzzohraGrandTotal = account1.EzzohraTotal + account2.EzzohraTotal;
             
             // Update the grand total display
             document.getElementById('your-grand-total').textContent = '$' + yourGrandTotal;
             document.getElementById('abdellatif-grand-total').textContent = '$' + abdellatifGrandTotal;
-            document.getElementById('essaid-grand-total').textContent = '$' + essaidGrandTotal;
+            document.getElementById('Ezzohra-grand-total').textContent = '$' + EzzohraGrandTotal;
             
             // Show the grand total section
             document.getElementById('total-section').style.display = 'block';
